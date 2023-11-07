@@ -286,14 +286,14 @@ export const Home = () => {
           </div>
         </div>
         <div
-          className="mt-10 grid gap-2 mb-8 md:grid-cols-2 xl:grid-cols-2 w-full  bg-black h-[500px] overflow-auto scrollbar-hide"
+          className="mt-10 grid gap-2 mb-8 md:grid-cols-2 xl:grid-cols-2 w-full  bg-bg-pri h-[500px] overflow-auto scrollbar-hide"
           id="posts"
         >
           {slides.map((index, key) => {
             return (
               <div key={key.url} className="">
                 <div className="w-[600px]  mt-20 mx-auto m-5">
-                  <div class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  <div class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-bg-ter">
                     <a href="#!">
                       <img
                         class="rounded h-[250px] w-full"
@@ -305,7 +305,7 @@ export const Home = () => {
                       <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                         {index.heading}
                       </h5>
-                      <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                      <p class="mb-4 text-base text-bg-sec  dark:text-neutral-200">
                         {index.message}
                       </p>
                     </div>

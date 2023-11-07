@@ -13,7 +13,7 @@ import { CourseDescripton } from "./pages/CourseDescripton";
 import { ANavbar } from "./pages/Acountnavbar";
 import { MyCourse } from "./pages/MyCourse";
 import { OurCourse } from "./pages/OurCourse";
-import Content from "./pages/Content";
+import { Content } from "./pages/Content";
 
 function App() {
   return (

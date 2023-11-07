@@ -112,8 +112,8 @@ export const Navbars = ({ children }) => {
             </div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
             &#8203;
-            <div className="inline-block align-bottom h-[500px] w-[200px] bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="inline-block align-bottom h-[500px] w-[200px] bg-bg-pri rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-bg-pti px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <Ai.AiOutlineClose
                     className="text-white text-xl justify-end ml-[430px]"
@@ -157,17 +157,20 @@ export const Navbars = ({ children }) => {
                             </i>
                           </span>
                         </div>
-                        <Link className="ml-[240px] text-[#1A7FC1] mt-5 right-0 pr-5">
+                        <Link className="ml-[240px] text-bg-sec mt-5 right-0 pr-5">
                           Forgot Password?
                         </Link>
-                        <button className="block w-1/2 mx-auto  bg-blue-500 text-white rounded-lg py-2 ">
+                        <Link
+                          to="/acounthomee"
+                          className="block w-1/2 mx-auto  bg-bg-ter hover:bg-bg-sec text-white rounded-lg py-2 "
+                        >
                           Login
-                        </button>
+                        </Link>
                         <span className="text-white ">
                           Don't have an Account?{" "}
                           <Link
                             onClick={opensignClodeLogin}
-                            className="text-[#1A7FC1] font-extrabold cursor-pointer"
+                            className="text-bg-sec font-extrabold cursor-pointer"
                           >
                             Sign Up
                           </Link>
@@ -191,7 +194,7 @@ export const Navbars = ({ children }) => {
               style={{ maxWidth: 1000 }}
             >
               <div className="md:flex w-full">
-                <div className="hidden md:block w-1/4 text-white bg-gray-900 py-10 px-10">
+                <div className="hidden md:block w-1/4 text-white bg-bg-pri py-10 px-10">
                   LOGO
                 </div>
                 <div className="w-full md:w-4/5 py-10 px-5 md:px-10">
@@ -320,7 +323,7 @@ export const Navbars = ({ children }) => {
                     </div>
                     <div className="flex -mx-3">
                       <div className="w-full px-3 mb-5">
-                        <button className="block w-full max-w-xs mx-auto bg-cyan-600 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
+                        <button className="block w-full max-w-xs mx-auto bg-bg-pri hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
                           REGISTER NOW
                         </button>{" "}
                         <span className="text-black ml-[250px] font-bold">

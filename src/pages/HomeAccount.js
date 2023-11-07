@@ -161,7 +161,7 @@ export const HomeAccount = () => {
         className={`p-2 items-center justify-center  mt-5 w-1/2 ml-12 sm:mx-auto  text-center mb-5 `}
       >
         <Link
-          to="/usercourses"
+          to="/ourcourses"
           className={`text-center justify-center mx-auto hover:bg-transparent border border-bg-ter text-bg-pri hover:text-bg-pri p-4 rounded-[40px] font-bold bg-bg-ter`}
         >
           View All course
