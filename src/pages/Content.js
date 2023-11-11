@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 import { ANavbar } from "./Acountnavbar";
-import {
-  AiOutlineFileText,
-  AiOutlinePlayCircle,
-  AiOutlineProfile,
-} from "react-icons/ai";
-import {
-  FaBook,
-  FaVideo,
-  FaPen,
-  FaPlayCircle,
-  FaFileAlt,
-  FaCaretDown, // Dropdown icon
-  FaCaretRight,
-  FaFilePdf, // Icon when dropdown is open
-} from "react-icons/fa";
-import { IconContext } from "react-icons";
-import { Disclosure } from "@headlessui/react";
-import { BsBookmarkDashFill, BsChevronDown } from "react-icons/bs";
-import { Dropdown } from "react-bootstrap";
-import { PiExamBold, PiExamLight } from "react-icons/pi";
-import { LuVideo } from "react-icons/lu";
-export const Content = ({ items }) => {
-  const [open, setOpen] = useState(false);
+import { MDBContainer } from "mdb-react-ui-kit";
+import { FaBook, FaVideo } from "react-icons/fa";
+import { BsBookmarkDashFill } from "react-icons/bs";
+import { PiExamBold } from "react-icons/pi";
+import { Link } from "react-router-dom";
+import Quiz from "./Quiz";
+export const Content = ({ onItemClick }) => {
+  const [activeModule, setActiveModule] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const toggleModule = (moduleId) => {
+    if (activeModule === moduleId) {
+      setActiveModule(null);
+    } else {
+      setActiveModule(moduleId);
+    }
+  };
+  const handleVideoClick = (video) => {
+    setSelectedVideo(video);
+    console.log(video); // Set the selected video
+  };
   const navItems = [
     {
       id: 1,
@@ -31,34 +28,37 @@ export const Content = ({ items }) => {
       items: [
         {
           id: 11,
+          workbookstatus: true,
           text: "workbook",
           icon: <BsBookmarkDashFill />,
-          items: [
-            { id: 72, text: "xxxxx.pdf", icon: <FaFilePdf />, eneable: true },
-            // { id: 32, text: "xxxxx.pdf", icon: <FaFilePdf /> ,},
-          ],
+          pdf: "this pdf",
         },
         {
           id: 22,
-          text: "Video",
+          text: "Video 1",
+          vedios: true,
           icon: <FaVideo />,
-          items: [
-            { id: 21, text: "Vedio 1", icon: <LuVideo /> },
-            { id: 31, text: "Vedio 2", icon: <LuVideo /> },
-            { id: 41, text: "Vedio 3", icon: <LuVideo /> },
-            { id: 51, text: "Vedio 4", icon: <LuVideo /> },
-          ],
+          videourl: "https://player.vimeo.com/video/137857207",
+        },
+        {
+          id: 24,
+          text: "Video 2",
+          vedios: true,
+          icon: <FaVideo />,
+          videourl: "https://player.vimeo.com/video/130890972",
+        },
+        {
+          id: 25,
+          text: "Video 3",
+          vedios: true,
+          icon: <FaVideo />,
+          videourl: "https://player.vimeo.com/video/124139626",
         },
         {
           id: 33,
+          quiz: true,
           text: "Quiz",
           icon: <PiExamBold />,
-          items: [
-            { id: 23, text: "xxxxx.pdf", icon: <PiExamLight /> },
-            { id: 33, text: "xxxxx.pdf", icon: <PiExamLight /> },
-            { id: 43, text: "xxxxx.pdf", icon: <PiExamLight /> },
-            { id: 53, text: "xxxxx.pdf", icon: <PiExamLight /> },
-          ],
         },
       ],
     },
@@ -69,106 +69,105 @@ export const Content = ({ items }) => {
       items: [
         {
           id: 100,
+          workbookstatus: true,
           text: "workbook",
           icon: <BsBookmarkDashFill />,
-          items: [
-            { id: 102, text: "xxxxx", icon: <FaFilePdf /> },
-            { id: 103, text: "xxxxx", icon: <FaFilePdf /> },
-            { id: 104, text: "xxxxx", icon: <FaFilePdf /> },
-            { id: 105, text: "xxxxx", icon: <FaFilePdf /> },
-          ],
         },
         {
-          id: 24,
+          id: 26,
           text: "Video",
+          vedios: true,
           icon: <FaVideo />,
-          items: [
-            { id: 110, text: "Vedio 1", icon: <LuVideo /> },
-            { id: 113, text: "Vedio 2", icon: <LuVideo /> },
-            { id: 114, text: "Vedio 3", icon: <LuVideo /> },
-            { id: 115, text: "Vedio 4", icon: <LuVideo /> },
-          ],
+          videourl: "video1url",
         },
         {
           id: 40,
+          quiz: true,
           text: "Quiz",
           icon: <PiExamBold />,
-          items: [
-            { id: 120, text: "xxxxx", icon: <PiExamLight /> },
-            { id: 121, text: "xxxxx", icon: <PiExamLight /> },
-            { id: 123, text: "xxxxx", icon: <PiExamLight /> },
-            { id: 124, text: "xxxxx", icon: <PiExamLight /> },
-          ],
         },
       ],
     },
   ];
-  const [openpdf, setpdf] = useState(false);
-  const [openvedio, setvideo] = useState(false);
-  const [openquiz, setQuiz] = useState(false);
-  const toggleDropdown = (itemId) => {
-    setOpen((prevOpen) => ({
-      ...prevOpen,
-      [itemId]: !prevOpen[itemId],
-    }));
-  };
-  const renderDropdown = (items, level = 2) => {
-    return (
-      <ul className={`pl-${level * 4} `}>
-        {items.map((item) => (
-          <li key={item.text}>
-            <button
-              onClick={() => toggleDropdown(item.id)}
-              className="w-full py-2 px-4 text-left text-sm flex items-center"
-            >
-              {open ? <FaCaretRight className="" /> : <FaCaretDown />}
-              {item.icon}
-              <span
-                onClick={() => setpdf(true)}
-                className={`ml-2 hover:text-bg-ter  ${
-                  open[items] ? " font-bold" : ""
-                } `}
-              >
-                {item.text}
-              </span>
-            </button>
-            {open[item.id] &&
-              item.items &&
-              renderDropdown(item.items, level + 2)}
-          </li>
-        ))}
-      </ul>
-    );
-  };
+
   return (
     <ANavbar>
-      <div className="flex ">
-        <div className="w-64 bg-bg-fou h-screen">
-          <ul className="p-4 text-bg-pri ">
+      <div className="lg:flex  lg:h-screen sm:grid-cols-1">
+        <div className="lg:w-64 bg-bg-fou shadow-black shadow-2xl text-bg-pri h-full overflow-y-auto sm:w-full">
+          <ul className="mt-8 ml-5">
             {navItems.map((item) => (
-              <li key={item.text} className=" text-2xl">
-                <button
-                  onClick={() => toggleDropdown(item.id)}
-                  className="w-full py-2 px-4 text-left text-sm flex items-center"
+              <li key={item.id} className="mb-4">
+                <div
+                  className="flex items-center space-x-2 cursor-pointer  "
+                  onClick={() => toggleModule(item.id)}
                 >
-                  {open[item.id] ? <FaCaretRight /> : <FaCaretDown />}
                   {item.icon}
-                  <span className="ml-2 hover:text-bg-ter font-extrabold">
-                    {item.text}
-                  </span>
-                </button>
-                {open[item.id] && item.items && renderDropdown(item.items, 1)}
+                  <span className="text-lg ">{item.text}</span>
+                </div>
+                {activeModule === item.id && (
+                  <ul className="ml-4">
+                    {item.items.map((subItem) => (
+                      <li
+                        key={subItem.id}
+                        className="mb-2 hover:bg-bg-fou hover:text-bg-pri"
+                      >
+                        <Link
+                          className="flex items-center space-x-2 text-bg-pri "
+                          onClick={() => handleVideoClick(subItem)}
+                        >
+                          {subItem.icon}
+                          <span>{subItem.text}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
         </div>
-        <div className={`bg-bg-ter h-[600px] w-full mx-auto mt-10 `}></div>
-        <div
-          className={`bg-bg-pri h-[600px] w-full mx-auto mt-10 hidden`}
-        ></div>
-        <div
-          className={`bg-bg-sec h-[600px] w-full mx-auto mt-10 hidden`}
-        ></div>
+        <div className="grid grid-cols-1 overflow-y-auto scrollbar-hide w-full mx-auto">
+          {selectedVideo ? ( // Render the video content if a video is selected
+            <div className="w-[900px]  ms-11 me-11 mt-16">
+              <MDBContainer>
+                <div className="justify-center align-middle items-center mx-auto">
+                  {selectedVideo.vedios ? (
+                    <iframe
+                      src={selectedVideo.videourl}
+                      title={selectedVideo.text}
+                      allowfullscreen
+                      className="h-[500px] w-[850px] rounded"
+                    ></iframe>
+                  ) : selectedVideo.quiz ? (
+                    // <Quiz />
+                    <div className="w-full mx-auto ms-8">
+                      {" "}
+                      <Quiz />
+                    </div>
+                  ) : selectedVideo.workbookstatus ? (
+                    <p>This is workbook</p>
+                  ) : (
+                    <span className="grid mt-5">
+                      <h2 className="font-bold space-x-1 text-xl">
+                        Video Description
+                      </h2>
+
+                      <p>{selectedVideo.text} Description Lorem ipsum...</p>
+                    </span>
+                  )}
+                </div>
+              </MDBContainer>
+            </div>
+          ) : (
+            <div className=" mt-16">
+              <MDBContainer>
+                <div className="w-[850px] justify-center align-middle items-center mx-auto">
+                  <h1 className="p-3 mt-0 text-2xl font-bold">worknook</h1>
+                </div>
+              </MDBContainer>
+            </div>
+          )}
+        </div>
       </div>
     </ANavbar>
   );
